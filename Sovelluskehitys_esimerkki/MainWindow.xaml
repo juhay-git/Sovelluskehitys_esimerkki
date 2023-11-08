@@ -15,6 +15,8 @@
         <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" Margin="587,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
         <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,152,381,70"/>
         <TextBox x:Name="viestirivi" HorizontalAlignment="Left" Margin="32,369,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" Height="24"/>
+        <ComboBox x:Name="combo_tuotteet" HorizontalAlignment="Left" Margin="587,247,0,0" VerticalAlignment="Top" Width="144" Height="29"/>
+        <Button x:Name="painike_poista" Content="Poistatuote" HorizontalAlignment="Left" Margin="587,298,0,0" VerticalAlignment="Top" Width="144" Height="39" Click="painike_poista_Click"/>
 
     </Grid>
 </Window>
