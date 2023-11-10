@@ -23,6 +23,7 @@ namespace Sovelluskehitys_esimerkki
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string solun_arvo;
         string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k2101792\\Documents\\tuotekanta.mdf;Integrated Security=True;Connect Timeout=30";
         public MainWindow()
         {
@@ -39,7 +40,7 @@ namespace Sovelluskehitys_esimerkki
             {
                 paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
             }
-            catch 
+            catch
             {
                 viestirivi.Text = "Tietojen haku epäonnistui";
             }
@@ -97,7 +98,7 @@ namespace Sovelluskehitys_esimerkki
             combo_tuotteet.DisplayMemberPath = "TUOTE";
             combo_tuotteet.SelectedValuePath = "ID";
 
-            while(lukija.Read())
+            while (lukija.Read())
             {
                 int id = lukija.GetInt32(0);
                 string tuote = lukija.GetString(1);
@@ -122,5 +123,56 @@ namespace Sovelluskehitys_esimerkki
             paivitaComboBox();
             paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
         }
+
+        private void tuote_lista_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            int sarake = tuote_lista.CurrentCell.Column.DisplayIndex;
+            solun_arvo = (e.Row.Item as DataRowView).Row[sarake].ToString();
+
+            viestirivi.Text = "Sarake: " + sarake + ", Arvo: " + solun_arvo;
+
+        }
+
+        private void tuote_lista_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                int sarake = tuote_lista.CurrentCell.Column.DisplayIndex;
+                string uusi_arvo = ((TextBox)e.EditingElement).Text;
+
+                int tuote_id = int.Parse((e.Row.Item as DataRowView).Row[0].ToString());
+
+                if (solun_arvo != uusi_arvo)
+                {
+                    string kysely = "";
+                    string kanta_sarake = "";
+                    SqlConnection kanta = new SqlConnection(polku);
+                    kanta.Open();
+
+                    if (sarake == 1) kanta_sarake = "nimi";
+                    else if (sarake == 2) kanta_sarake = "hinta";
+
+                    kysely = "UPDATE tuotteet SET " + kanta_sarake + "='" + uusi_arvo + "' WHERE id=" + tuote_id;
+
+                    SqlCommand komento = new SqlCommand(kysely, kanta);
+                    komento.ExecuteNonQuery();
+
+                    kanta.Close();
+
+                    viestirivi.Text = "Uusi arvo: " + uusi_arvo;
+
+                    paivitaComboBox();
+                }
+                else
+                {
+                    viestirivi.Text = "Arvo ei muuttunut";
+                }
+
+            }  
+            catch 
+            {
+                viestirivi.Text = "Muokkaus ei onnistunut";
+            }
+        }   
     }
 }
