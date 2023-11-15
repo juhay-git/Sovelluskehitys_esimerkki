@@ -5,18 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sovelluskehitys_esimerkki"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Tilaustiedot" Height="450" Width="800">
     <Grid>
-        <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="32,75,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
-        <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="587,174,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="painike_lisaa_Click"/>
-        <Label Content="Tuotteen nimi" HorizontalAlignment="Left" Margin="454,77,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
-        <Label Content="Tuotteen hinta" HorizontalAlignment="Left" Margin="454,124,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
-        <TextBox x:Name="tuote_nimi" HorizontalAlignment="Left" Margin="587,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
-        <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" Margin="587,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
-        <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,152,381,70" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding"/>
-        <TextBox x:Name="viestirivi" HorizontalAlignment="Left" Margin="32,369,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" Height="24"/>
-        <ComboBox x:Name="combo_tuotteet" HorizontalAlignment="Left" Margin="587,247,0,0" VerticalAlignment="Top" Width="144" Height="29"/>
-        <Button x:Name="painike_poista" Content="Poistatuote" HorizontalAlignment="Left" Margin="587,298,0,0" VerticalAlignment="Top" Width="144" Height="39" Click="painike_poista_Click"/>
+        <TabControl>
+            <TabItem Header="Tuotetiedot">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="32,30,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
+                    <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,97,375,97" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding"/>
+                    <TextBox x:Name="viestirivi" HorizontalAlignment="Left" Margin="32,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" Height="24"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Lisää/poista">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="167,118,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="painike_lisaa_Click"/>
+                    <Label Content="Tuotteen nimi" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
+                    <Label Content="Tuotteen hinta" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
+                    <TextBox x:Name="tuote_nimi" HorizontalAlignment="Left" Margin="167,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
+                    <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" Margin="167,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
+                    <ComboBox x:Name="combo_tuotteet" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="144" Height="29"/>
+                    <Button x:Name="painike_poista" Content="Poistatuote" HorizontalAlignment="Left" Margin="167,179,0,0" VerticalAlignment="Top" Width="144" Height="39" Click="painike_poista_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>
