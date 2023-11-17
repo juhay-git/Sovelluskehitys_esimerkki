@@ -32,6 +32,9 @@ namespace Sovelluskehitys_esimerkki
             paivitaComboBox();
 
             paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
+            paivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id;", "tilaukset", tilaukset_lista);
+
         }
 
         private void painike_hae_Click(object sender, RoutedEventArgs e)
@@ -173,6 +176,21 @@ namespace Sovelluskehitys_esimerkki
             {
                 viestirivi.Text = "Muokkaus ei onnistunut";
             }
-        }   
+        }
+
+        private void painike_asiakas_click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection kanta = new SqlConnection(polku);
+            kanta.Open();
+
+            string sql = "INSERT INTO asiakkaat (nimi, puhelinnumero) VALUES ('" + asiakas_nimi.Text + "','" + asiakas_puhnro.Text + "')";
+
+            SqlCommand komento = new SqlCommand(sql, kanta);
+            komento.ExecuteNonQuery();
+
+            kanta.Close();
+
+            paivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
+        }
     }
 }
