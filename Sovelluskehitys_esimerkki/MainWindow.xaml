@@ -65,9 +65,9 @@
                     </DataGrid>
                     <Label Content="Asiakas" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
                     <Label Content="Tuote" HorizontalAlignment="Left" Margin="204,245,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Width="120"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="266,249,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="96,285,0,0" VerticalAlignment="Top" Height="35" Width="257" RenderTransformOrigin="0.471,-0.274"/>
+                    <ComboBox x:Name="Asiakas_combo" HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="Tuote_combo" HorizontalAlignment="Left" Margin="266,249,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="Lisää_tilaus" Content="Lisää tilaus" HorizontalAlignment="Left" Margin="96,285,0,0" VerticalAlignment="Top" Height="35" Width="257" RenderTransformOrigin="0.471,-0.274" Click="Lisää_tilaus_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>
