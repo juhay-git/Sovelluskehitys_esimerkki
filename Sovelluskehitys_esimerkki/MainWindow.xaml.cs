@@ -45,7 +45,7 @@ namespace Sovelluskehitys_esimerkki
             }
             catch
             {
-                viestirivi.Text = "Tietojen haku epäonnistui";
+                Tilaviesti.Text = "Tietojen haku epäonnistui";
             }
         }
 
@@ -132,7 +132,7 @@ namespace Sovelluskehitys_esimerkki
             int sarake = tuote_lista.CurrentCell.Column.DisplayIndex;
             solun_arvo = (e.Row.Item as DataRowView).Row[sarake].ToString();
 
-            viestirivi.Text = "Sarake: " + sarake + ", Arvo: " + solun_arvo;
+            Tilaviesti.Text = "Sarake: " + sarake + ", Arvo: " + solun_arvo;
 
         }
 
@@ -162,35 +162,44 @@ namespace Sovelluskehitys_esimerkki
 
                     kanta.Close();
 
-                    viestirivi.Text = "Uusi arvo: " + uusi_arvo;
+                    Tilaviesti.Text = "Uusi arvo: " + uusi_arvo;
 
                     paivitaComboBox();
                 }
                 else
                 {
-                    viestirivi.Text = "Arvo ei muuttunut";
+                    Tilaviesti.Text = "Arvo ei muuttunut";
                 }
 
             }  
             catch 
             {
-                viestirivi.Text = "Muokkaus ei onnistunut";
+                Tilaviesti.Text = "Muokkaus ei onnistunut";
             }
         }
 
         private void painike_asiakas_click(object sender, RoutedEventArgs e)
         {
-            SqlConnection kanta = new SqlConnection(polku);
-            kanta.Open();
+            try
+            {
+                SqlConnection kanta = new SqlConnection(polku);
+                kanta.Open();
 
-            string sql = "INSERT INTO asiakkaat (nimi, puhelinnumero) VALUES ('" + asiakas_nimi.Text + "','" + asiakas_puhnro.Text + "')";
+                string sql = "INSERT INTO asiakkaat (nimi, puhelinnumero) VALUES ('" + asiakas_nimi.Text + "','" + asiakas_puhnro.Text + "')";
 
-            SqlCommand komento = new SqlCommand(sql, kanta);
-            komento.ExecuteNonQuery();
+                SqlCommand komento = new SqlCommand(sql, kanta);
+                komento.ExecuteNonQuery();
 
-            kanta.Close();
+                kanta.Close();
 
-            paivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
+                paivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
+
+                Tilaviesti.Text = "Asiakkaan lisääminen onnistui";
+            }
+            catch
+            {
+                Tilaviesti.Text = "Muokkaus epäonnistui";
+            }
         }
     }
 }

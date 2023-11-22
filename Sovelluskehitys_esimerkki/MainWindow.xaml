@@ -7,12 +7,22 @@
         mc:Ignorable="d"
         Title="Tilaustiedot" Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <Menu DockPanel.Dock ="Top">
+            <MenuItem Header="_Tiedosto">
+                <MenuItem Header="_Avaa"></MenuItem>
+                <MenuItem Header="_Sulje"></MenuItem>
+                <MenuItem Header="_Tallenna"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Tietokanta">
+                <MenuItem Header="_Avaa"></MenuItem>
+                <MenuItem Header="_Sulje"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Margin="0,25,0,0">
             <TabItem Header="Tuotetiedot">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="32,30,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
                     <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,97,375,97" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding"/>
-                    <TextBox x:Name="viestirivi" HorizontalAlignment="Left" Margin="32,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" Height="24"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Lisää/poista">
@@ -49,18 +59,21 @@
                                     <DataTemplate>
                                         <Button Name="painike_toimita_tilaus" Content="Toimita"/>
                                     </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>               
+                                </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label Content="Asiakas" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Tuote" HorizontalAlignment="Left" Margin="204,260,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="66,264,0,0" VerticalAlignment="Top" Width="120"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="266,264,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="96,307,0,0" VerticalAlignment="Top" Height="35" Width="257"/>
+                    <Label Content="Asiakas" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Tuote" HorizontalAlignment="Left" Margin="204,245,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="266,249,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="96,285,0,0" VerticalAlignment="Top" Height="35" Width="257" RenderTransformOrigin="0.471,-0.274"/>
                 </Grid>
             </TabItem>
         </TabControl>
+        <StatusBar VerticalAlignment ="Bottom">
+            <TextBlock x:Name="Tilaviesti" Text="Valmis"/>
+        </StatusBar>
 
     </Grid>
 </Window>
