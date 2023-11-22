@@ -30,6 +30,7 @@ namespace Sovelluskehitys_esimerkki
             InitializeComponent();
 
             paivitaComboBox();
+            paivitaAsiakasComboBox();
 
             paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
             paivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
@@ -100,7 +101,11 @@ namespace Sovelluskehitys_esimerkki
             combo_tuotteet.DisplayMemberPath = "TUOTE";
             combo_tuotteet.SelectedValuePath = "ID";
 
-            while(lukija.Read()) 
+            combo_tuotteet_2.ItemsSource = dt.DefaultView;
+            combo_tuotteet_2.DisplayMemberPath = "TUOTE";
+            combo_tuotteet_2.SelectedValuePath = "ID";
+
+            while (lukija.Read()) 
             {
                 int id = lukija.GetInt32(0);
                 string tuote = lukija.GetString(1);
@@ -111,7 +116,35 @@ namespace Sovelluskehitys_esimerkki
             kanta.Close();
         }
 
-        private void painike_poista_Click(object sender, RoutedEventArgs e)
+
+        private void paivitaAsiakasComboBox()
+        {
+            SqlConnection kanta = new SqlConnection(polku);
+            kanta.Open();
+
+            SqlCommand komento = new SqlCommand("SELECT * FROM asiakkaat", kanta);
+            SqlDataReader lukija = komento.ExecuteReader();
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("NIMI", typeof(string));
+
+            combo_asiakkaat.ItemsSource = dt.DefaultView;
+            combo_asiakkaat.DisplayMemberPath = "NIMI";
+            combo_asiakkaat.SelectedValuePath = "ID";
+
+            while (lukija.Read())
+            {
+                int id = lukija.GetInt32(0);
+                string nimi = lukija.GetString(1);
+                dt.Rows.Add(id, nimi);
+            }
+
+            lukija.Close();
+            kanta.Close();
+        }
+
+            private void painike_poista_Click(object sender, RoutedEventArgs e)
         {
             SqlConnection kanta = new SqlConnection(polku);
             kanta.Open();
@@ -199,6 +232,24 @@ namespace Sovelluskehitys_esimerkki
                 tilaviesti.Text = "Asiakkaan lisääminen ei onnistunut";
             }
             
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection kanta = new SqlConnection(polku);
+            kanta.Open();
+
+            string asiakasID = combo_asiakkaat.SelectedValue.ToString();
+            string tuoteID = combo_tuotteet_2.SelectedValue.ToString();
+
+            string sql = "INSERT INTO tilaukset (asiakas_id, tuote_id) VALUES ('"+asiakasID+"', '"+tuoteID+"')";
+
+            SqlCommand komento = new SqlCommand(sql, kanta);
+            komento.ExecuteNonQuery();
+            kanta.Close();
+
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id", "tilaukset", tilaukset_lista);
+
         }
     }
 }
