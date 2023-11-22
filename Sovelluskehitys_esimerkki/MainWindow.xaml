@@ -7,12 +7,22 @@
         mc:Ignorable="d"
         Title="Tilaustiedot" Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <Menu DockPanel.Dock ="Top">
+            <MenuItem Header="_Tiedosto">
+                <MenuItem Header="_Avaa"></MenuItem>
+                <MenuItem Header="_Sulje"></MenuItem>
+                <MenuItem Header="_Tallenna"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Tietokanta">
+                <MenuItem Header="_Avaa"></MenuItem>
+                <MenuItem Header="_Sulje"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Margin="0,25,0,0">
             <TabItem Header="Tuotetiedot">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="32,33,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
                     <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,97,375,97" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding"/>
-                    <TextBox x:Name="viestirivi" HorizontalAlignment="Left" Margin="32,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="699" Height="24"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Lisää/poista tuote">
@@ -29,11 +39,11 @@
             <TabItem Header="Asiakkaat">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="asiakas_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,21,375,173"/>
-                    <Label Content="Nimi" HorizontalAlignment="Left" Margin="32,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.713,0.496"/>
-                    <Label Content="Puhelin" HorizontalAlignment="Left" Margin="32,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.011,0.114"/>
-                    <TextBox x:Name="asiakas_nimi" HorizontalAlignment="Left" Margin="106,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
-                    <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="106,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197" Height="18"/>
-                    <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="106,327,0,0" VerticalAlignment="Top" Width="197" Height="30" Click="painike_asiakas_Click"/>
+                    <Label Content="Nimi" HorizontalAlignment="Left" Margin="32,227,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.713,0.496"/>
+                    <Label Content="Puhelin" HorizontalAlignment="Left" Margin="32,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.011,0.114"/>
+                    <TextBox x:Name="asiakas_nimi" HorizontalAlignment="Left" Margin="106,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
+                    <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="106,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197" Height="18"/>
+                    <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="106,307,0,0" VerticalAlignment="Top" Width="197" Height="30" Click="painike_asiakas_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tilaukset">
@@ -61,5 +71,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <StatusBar VerticalAlignment="Bottom">
+            <TextBlock x:Name="tilaviesti" Text="Valmis"/>
+        </StatusBar>
     </Grid>
 </Window>
