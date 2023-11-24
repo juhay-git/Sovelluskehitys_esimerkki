@@ -12,4 +12,6 @@ SELECT * FROM tuotteet;
 
 SELECT * FROM asiakkaat;
 
+SELECT * FROM tilaukset;
+
 SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id

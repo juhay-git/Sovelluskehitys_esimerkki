@@ -34,7 +34,8 @@ namespace Sovelluskehitys_esimerkki
 
             paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
             paivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
-            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id", "tilaukset", tilaukset_lista);
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='0'", "tilaukset", tilaukset_lista);
+            paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu ='1'", "toimitetut", toimitetut_lista);
         }
 
         private void painike_hae_Click(object sender, RoutedEventArgs e)
