@@ -47,8 +47,18 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Tilaukset">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="tilaukset_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,23,397,170" AutoGenerateColumns="False">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FF2013C1" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Background="#FFED1919">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="175*"/>
+                        <ColumnDefinition Width="619*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="tilaukset_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,23,397,170" AutoGenerateColumns="False" Grid.ColumnSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="id" Binding="{Binding Path='id'}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="asiakas" Binding="{Binding Path='asiakas'}" IsReadOnly="True"/>
@@ -64,10 +74,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label Content="Asiakas" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Tuote" HorizontalAlignment="Left" Margin="204,245,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="Asiakas_combo" HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Width="120"/>
-                    <ComboBox x:Name="Tuote_combo" HorizontalAlignment="Left" Margin="266,249,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Button x:Name="Lisää_tilaus" Content="Lisää tilaus" HorizontalAlignment="Left" Margin="96,285,0,0" VerticalAlignment="Top" Height="35" Width="257" RenderTransformOrigin="0.471,-0.274" Click="Lisää_tilaus_Click"/>
+                    <Label Content="Tuote" HorizontalAlignment="Left" Margin="29,245,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <ComboBox x:Name="Asiakas_combo" HorizontalAlignment="Left" Margin="66,249,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+                    <ComboBox x:Name="Tuote_combo" HorizontalAlignment="Left" Margin="91,249,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                    <Button x:Name="Lisää_tilaus" Content="Lisää tilaus" HorizontalAlignment="Left" Margin="96,285,0,0" VerticalAlignment="Top" Height="35" Width="257" RenderTransformOrigin="0.471,-0.274" Click="Lisää_tilaus_Click" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Toimitetut">
@@ -79,7 +89,7 @@
                             <DataGridTextColumn Header="tuote" Binding="{Binding Path='tuote'}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="toimitettu" Binding="{Binding Path='toimitettu'}" IsReadOnly="True"/>
                         </DataGrid.Columns>
-                    </DataGrid>    
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
